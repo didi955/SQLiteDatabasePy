@@ -3,12 +3,10 @@ import sqlite3
 
 class DatabaseAccess:
 
-    def __init__(self, file):
-        self.connection = None
+    def __init__(self, name, file):
         self.file = file
-
-    def setupConnection(self):
-        self.connection = sqlite3.connect(self.file)
+        self.name = name
+        self.connection = None
 
     def getConnection(self) -> sqlite3.Connection:
         return self.connection
@@ -17,7 +15,7 @@ class DatabaseAccess:
         return self.file
 
     def init(self):
-        self.setupConnection()
+        self.connection = sqlite3.connect(self.name)
 
     def stop(self):
         self.connection.close()
